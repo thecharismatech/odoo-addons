@@ -1,0 +1,21 @@
+{
+    'name': 'Bulk Price Update',
+    'version': '18.0.1.0.0',
+    'category': 'Operations',
+    'summary': 'Bulk update product prices from purchases and stock operations',
+    'author': 'Mahmoud Osama',
+    'website': 'https://www.maxmatech.com',
+    'depends': ['purchase', 'stock', 'mail'],
+    'data': [
+        'security/security.xml',
+        'security/ir.model.access.csv',
+        'data/ir_sequence_data.xml',
+        'data/bulk_price_update_cron.xml',
+        'views/bulk_price_update_views.xml',
+        'views/menu_items.xml',
+    ],
+    'images': ['static/description/icon.png'],
+    'installable': True,
+    'application': True,
+    'license': 'LGPL-3',
+}

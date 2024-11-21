@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_bulk_price_update_form" model="ir.ui.view">
+        <field name="name">bulk.price.update.form</field>
+        <field name="model">bulk.price.update</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button string="Update Prices" 
+                            type="object" 
+                            name="bulk_update_prices" 
+                            class="btn-primary"
+                            invisible="state != 'draft'"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="source_type" widget="radio"/>
+                            <field name="fixed_amount"/>
+                            <field name="percentage"/>
+                            <field name="purchase_order_id" invisible="source_type != 'purchase'"/>
+                            <field name="stock_picking_id" invisible="source_type != 'stock'"/>
+                        </group>
+                        <group>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Source Lines" name="source_lines">
+                            <field name="purchase_line_ids" readonly="1" invisible="source_type != 'purchase'">
+                                <list>
+                                    <field name="product_id"/>
+                                    <field name="product_qty"/>
+                                    <field name="price_unit" string="Purchase Price"/>
+                                    <field name="product_id" string="Sales Price"/>
+                                    <field name="price_subtotal"/>
+                                </list>
+                            </field>
+                            <field name="stock_move_ids" readonly="1" invisible="source_type != 'stock'">
+                                <list>
+                                    <field name="product_id"/>
+                                    <field name="product_uom_qty"/>
+                                    <field name="product_id" string="Sales Price"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Updated Products" name="updated_products">
+                            <field name="updated_line_ids">
+                                <list editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="old_price"/>
+                                    <field name="new_price"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="notes"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+    <record id="view_bulk_price_update_list" model="ir.ui.view">
+        <field name="name">bulk.price.update.list</field>
+        <field name="model">bulk.price.update</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="fixed_amount"/>
+                <field name="percentage"/>
+                <field name="state"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+   
+    <record id="action_bulk_price_update" model="ir.actions.act_window">
+        <field name="name">Bulk Price Update</field>
+        <field name="res_model">bulk.price.update</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

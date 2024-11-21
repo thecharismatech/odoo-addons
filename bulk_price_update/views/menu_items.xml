@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Root Menu for Main App -->
+    <menuitem id="menu_bulk_price_root"
+              name="Bulk Updates"
+              web_icon="bulk_price_update,static/description/icon.png"
+              sequence="50"/>
+
+    <!-- Price Updates Menu -->
+    <menuitem id="menu_bulk_price_update"
+              name="Price Updates"
+              parent="menu_bulk_price_root"
+              action="action_bulk_price_update"
+              sequence="10"/>
+
+    <!-- Configuration Menu -->
+    <menuitem id="menu_bulk_price_config"
+              name="Configuration"
+              parent="menu_bulk_price_root"
+              sequence="100"/>
+
+    <!-- Purchase Integration Menu -->
+    <menuitem id="menu_bulk_price_purchase"
+              name="Price Updates"
+              parent="purchase.menu_purchase_config"
+              action="action_bulk_price_update"
+              sequence="20"/>
+</odoo>
